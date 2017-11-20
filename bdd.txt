@@ -1,0 +1,156 @@
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
+
+
+#------------------------------------------------------------
+# Table: Equipe
+#------------------------------------------------------------
+
+CREATE TABLE Equipe(
+        eqp_id       Int NOT NULL ,
+        eqp_nom      Varchar (25) ,
+        eqp_couleur  Varchar (25) ,
+        eqp_datecrea Date ,
+        eqp_format   Int ,
+        PRIMARY KEY (eqp_id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Guerrier
+#------------------------------------------------------------
+
+CREATE TABLE Guerrier(
+        mrp_def_id Int NOT NULL ,
+        PRIMARY KEY (mrp_def_id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Mage
+#------------------------------------------------------------
+
+CREATE TABLE Mage(
+        mrp_mana   Int ,
+        mrp_def_id Int NOT NULL ,
+        PRIMARY KEY (mrp_def_id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Archer
+#------------------------------------------------------------
+
+CREATE TABLE Archer(
+        mrp_def_id Int NOT NULL ,
+        PRIMARY KEY (mrp_def_id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Partie
+#------------------------------------------------------------
+
+CREATE TABLE Partie(
+        prt_id        Int NOT NULL ,
+        prt_datedeb   Date ,
+        prt_dimension Int ,
+        prm_id        Int ,
+        PRIMARY KEY (prt_id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Action
+#------------------------------------------------------------
+
+CREATE TABLE Action(
+        act_id          Int NOT NULL ,
+        act_numero      Int ,
+        act_type        Varchar (25) ,
+        act_mrp_cible   Int ,
+        act_coordonneex Int ,
+        act_coordonneey Int ,
+        mrp_id          Int ,
+        prt_id          Int ,
+        PRIMARY KEY (act_id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Parametre
+#------------------------------------------------------------
+
+CREATE TABLE Parametre(
+        prm_id     Int NOT NULL ,
+        prm_taille Int ,
+        prm_ptinit Int ,
+        prm_crit   Int ,
+        PRIMARY KEY (prm_id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Morpion
+#------------------------------------------------------------
+
+CREATE TABLE Morpion(
+        mrp_def_id     Int NOT NULL ,
+        mrp__def_nom   Varchar (25) ,
+        mrp_def_icone  Varchar (25) ,
+        mrp_def_hp     Int ,
+        mrp__def_degat Int ,
+        PRIMARY KEY (mrp_def_id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Morpion_en_jeu
+#------------------------------------------------------------
+
+CREATE TABLE Morpion_en_jeu(
+        mrp_id           Int NOT NULL ,
+        mrp_nom          Varchar (25) ,
+        mrp_coordonneesX Int ,
+        mrp_coordonneesY Int ,
+        mrp_icone        Varchar (25) ,
+        mrp_hp           Int ,
+        mrp_degat        Int ,
+        mrp_mana         Int ,
+        mrp_classe       Varchar (25) ,
+        PRIMARY KEY (mrp_id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: appartient
+#------------------------------------------------------------
+
+CREATE TABLE appartient(
+        eqp_id     Int NOT NULL ,
+        mrp_def_id Int NOT NULL ,
+        PRIMARY KEY (eqp_id ,mrp_def_id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: contient
+#------------------------------------------------------------
+
+CREATE TABLE contient(
+        eqp_id Int NOT NULL ,
+        mrp_id Int NOT NULL ,
+        PRIMARY KEY (eqp_id ,mrp_id )
+)ENGINE=InnoDB;
+
+ALTER TABLE Guerrier ADD CONSTRAINT FK_Guerrier_mrp_def_id FOREIGN KEY (mrp_def_id) REFERENCES Morpion(mrp_def_id);
+ALTER TABLE Mage ADD CONSTRAINT FK_Mage_mrp_def_id FOREIGN KEY (mrp_def_id) REFERENCES Morpion(mrp_def_id);
+ALTER TABLE Archer ADD CONSTRAINT FK_Archer_mrp_def_id FOREIGN KEY (mrp_def_id) REFERENCES Morpion(mrp_def_id);
+ALTER TABLE Partie ADD CONSTRAINT FK_Partie_prm_id FOREIGN KEY (prm_id) REFERENCES Parametre(prm_id);
+ALTER TABLE Action ADD CONSTRAINT FK_Action_mrp_id FOREIGN KEY (mrp_id) REFERENCES Morpion_en_jeu(mrp_id);
+ALTER TABLE Action ADD CONSTRAINT FK_Action_prt_id FOREIGN KEY (prt_id) REFERENCES Partie(prt_id);
+ALTER TABLE appartient ADD CONSTRAINT FK_appartient_eqp_id FOREIGN KEY (eqp_id) REFERENCES Equipe(eqp_id);
+ALTER TABLE appartient ADD CONSTRAINT FK_appartient_mrp_def_id FOREIGN KEY (mrp_def_id) REFERENCES Morpion(mrp_def_id);
+ALTER TABLE contient ADD CONSTRAINT FK_contient_eqp_id FOREIGN KEY (eqp_id) REFERENCES Equipe(eqp_id);
+ALTER TABLE contient ADD CONSTRAINT FK_contient_mrp_id FOREIGN KEY (mrp_id) REFERENCES Morpion_en_jeu(mrp_id);
