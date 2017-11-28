@@ -1,14 +1,4 @@
 
-
- <html>
-
-    <head>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/style.css" />
-        <title>Blog</title>
-    </head>
-
-	<body>
 	
 	<form method="post" action="php/resultfile.php" enctype="multipart/form-data" name="form" id="form">
                     <fieldset>
@@ -53,7 +43,3 @@
 	
 	
 	
-	
-	
-	</body>
-	</html>
