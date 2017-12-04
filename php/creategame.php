@@ -11,7 +11,7 @@
                                                         $listeequip = listequip();
 														echo "<select name='equipe1' size='1'>";
                                                         foreach ($listeequip as $keyList => $valueList) {
-                                                                echo "<option id=".$valueList["eqp_id"].">".$valueList["eqp_nom"]."</option>";
+                                                                echo "<option value=".$valueList["eqp_id"].">".$valueList["eqp_nom"]."</option>";
                                                         }
 														echo "</select>";
 														
@@ -23,7 +23,7 @@
                                                         
 														echo "<select name='equipe2' size='1'>";
                                                         foreach ($listeequip as $keyList => $valueList) {
-                                                                echo "<option id=".$valueList["eqp_id"].">".$valueList["eqp_nom"]."</option>";
+                                                                echo "<option value=".$valueList["eqp_id"].">".$valueList["eqp_nom"]."</option>";
                                                         }
 														echo "</select>";
                                                 ?>
