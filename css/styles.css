@@ -57,14 +57,3 @@ footer {
   
 }
 
-/*////////partie\\\\\\ */
-
-table#grille td {
-    width: 50px;
-    margin: 0;
-    border-style: solid;
-    border-color: black;
-    height: 50px;
-    text-align: center
-
-}

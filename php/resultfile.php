@@ -28,6 +28,8 @@ if($_POST['formType']==1) {
 						   }
 						   
 if($_POST['formType']==2) {
+	supprmrpig();
+	resetincr();
 	$infmrp=selectmrpeqp($_POST["equipe1"]);
 	$eqp=1;
 			foreach ($infmrp as $keyList => $valueList) {
@@ -44,5 +46,10 @@ if($_POST['formType']==2) {
 														}
 	header ('location:../index.php?page=partie.php');
 }
-						   
+
+if($_POST['formType']==3) {
+	if ($_POST["equipe"]==1) {
+		
+	}
+}
 ?>

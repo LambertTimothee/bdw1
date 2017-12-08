@@ -3,7 +3,7 @@
 
 	// connexion à la BD
 	function connectBD() {
-			$connexion = mysqli_connect("localhost", "root", "", "morpion");
+			$connexion = mysqli_connect("localhost", "p1710707", "mZaewr7J", "p1710707");
 			if (mysqli_connect_errno()) {
 				printf("Échec de la connexion : %s\n", mysqli_connect_error());
 				exit();
@@ -11,7 +11,11 @@
 			mysqli_query($connexion, 'SET NAMES UTF8'); // requete pour avoir les noms en UTF8
 			return $connexion;
 	}
-
+	
+	function deconnectBD() {
+		global $connexion;
+		mysqli_close($connexion);
+	}
 
 	function ajoutteam($eqpname,$eqpcolor,$eqpformat) {
 			global $connexion;
@@ -63,26 +67,26 @@
 		
 	}
 	
-function getPara(){
-	global $connexion;
-	$sql = "SELECT * FROM parametre where prm_id = (SELECT MAX(prm_id) FROM parametre)";
-	$res = mysqli_query($connexion,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysql_error());
-	while($arr = mysqli_fetch_assoc($res) ){ 
-		$retour[] = $arr;
+	function supprmrpig() {
+			global $connexion;
+			$sql = "DELETE FROM morpion_en_jeu";
+			mysqli_query($connexion,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysqli_error());
 	}
-	return $retour;
-}
-
-function getEquip($eqp){
-	global $connexion;
-	//$sql = "select * FROM equipe e NATURAL JOIN contient c NATURAL JOIN morpion_en_jeu m WHERE c.eqp_id = $eqp"; //TODO
-
-	$res = mysqli_query($connexion,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysql_error());
-	while($arr = mysqli_fetch_assoc($res) ){ 
-		$retour[] = $arr;
+	
+	function resetincr() {
+			global $connexion;
+			$sql = "ALTER TABLE morpion_en_jeu AUTO_INCREMENT = 1";
+			mysqli_query($connexion,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysqli_error());
 	}
-	return $retour;
-}
-
+	
+	function listemrpeqp ($eqp_ig) {
+			global $connexion;
+			$sql = "SELECT * FROM morpion_en_jeu WHERE eqp_ig=$eqp_ig";
+			$res=mysqli_query($connexion,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysqli_error());
+			while($arr = mysqli_fetch_assoc($res) ){ 
+					$ret[] = $arr;
+			}
+			return $ret;
+	}
 
 ?>
