@@ -34,14 +34,14 @@ if($_POST['formType']==2) {
 	$eqp=1;
 			foreach ($infmrp as $keyList => $valueList) {
 														
-														addmrpig($valueList["mrp__def_nom"],$valueList["mrp_def_icone"],$valueList["mrp_def_hp"],$valueList["mrp__def_degat"],$valueList["mrp_def_mana"],$valueList["mrp_def_class"],$eqp);	
+														addmrpig($valueList["mrp__def_nom"],$valueList["mrp_def_icone"],$valueList["mrp_def_hp"],$valueList["mrp__def_degat"],$valueList["mrp_def_mana"],$valueList["mrp_def_class"],$valueList['eqp_id'],$eqp);	
 															
 														}
 	$infmrp=selectmrpeqp($_POST["equipe2"]);
 	$eqp=2;
 			foreach ($infmrp as $keyList => $valueList) {
 														
-														addmrpig($valueList["mrp__def_nom"],$valueList["mrp_def_icone"],$valueList["mrp_def_hp"],$valueList["mrp__def_degat"],$valueList["mrp_def_mana"],$valueList["mrp_def_class"],$eqp);	
+														addmrpig($valueList["mrp__def_nom"],$valueList["mrp_def_icone"],$valueList["mrp_def_hp"],$valueList["mrp__def_degat"],$valueList["mrp_def_mana"],$valueList["mrp_def_class"],$valueList['eqp_id'],$eqp);	
 															
 														}
 	header ('location:../index.php?page=partie.php');
