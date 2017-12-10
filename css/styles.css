@@ -1,5 +1,7 @@
+
 body {
-    background-color: #EEEEEE;
+    margin: 0;
+
 }
 
 header,
@@ -10,42 +12,84 @@ footer {
 }
 
 header {
-    background-color: #B0B7B6;
+    background-color: #33CF6E;
+    height: 130px;
     text-align: center;
+    padding: 10px;
+    display: flex;
    
+}
+header div{
+    height: 100%;
+    display: inline-block;
+
+}
+ #site_logo{
+    width: 15%;
+ }
+
+#site_titre{
+        width: 80%;
+            margin-left: -86px;
+            margin-top: 24px;
+}
+
+header img{
+        max-width: 100%;
+    max-height: 100%;
+}
+
+a{ 
+text-decoration:none; 
+} 
+
+
+a:visited{
+    color: initial;
+}
+
+#menu ul{
+        list-style: none;
+        margin:0;
+        padding: 0;
+            width: max-content
+
+}
+
+#menu div {
+    background-color: bisque;
+    padding: 5px;
+}
+#menu div:hover{
+    background-color: #ecd2b3;
+        cursor: pointer;
 }
 
 #centre {
     display: flex;
     background-color: #EEEEEE;
-    justify-content: space-between;
-    margin-left: 3%;
 }
 
 #menu {
-    width: 12%;
+    width: auto;
     background-color: #8AD7CC;
-    padding-left: 1em;
     line-height: 2em;
-	 border-radius: 1em;
-	 height: 100%;
+    height: auto;
 
 }
 
-#menu a {
-    
-    text-decoration: underline;
-}
 
 #menu a:hover {
     background-color:#000202
     text-decoration: none;
+
 }
 
 main {
-    width: 75%;
+    width: auto;
     background-color: #EEEEEE;
     padding-bottom: 6em;
+    padding-top: 0;
 }
 
 footer {
@@ -59,12 +103,51 @@ footer {
 
 /*////////partie\\\\\\ */
 
+#game_div{
+    display: flex;
+}
+
+.eqp_name{
+    font-size: 20px;
+    font-family: Impact;
+}
+
 table#grille td {
-    width: 50px;
+    width: 206px;
     margin: 0;
     border-style: solid;
     border-color: black;
-    height: 50px;
+    height: 200px;
     text-align: center
     
 }
+
+#jeu{
+    width: auto;
+    display: inline-block;
+    margin: auto;
+}
+
+.equipe_en_jeu{
+    background-color: wheat;
+    width: 20%;
+    display: inline-block;
+    text-align: center;
+}
+
+.equipe_en_jeu .morpion{
+    height: auto;
+    width: 100%;
+    /*background: red;*/
+    text-align: center;
+}
+
+.equipe_en_jeu .morpion img{
+    height: auto;
+    max-width: 40%;
+}
+
+.mrp_descr p{
+    margin:0;
+}
+

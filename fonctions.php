@@ -111,7 +111,7 @@ function getPara(){
   	global $connexion;
  	$sql = "SELECT * FROM equipe";
  	$res=mysqli_query($connexion,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysql_error());
- 	//$sql = "select * FROM equipe e NATURAL JOIN contient c NATURAL JOIN morpion_en_jeu m WHERE c.eqp_id = $eqp"; //TODO
+ 	$sql = "select * FROM equipe e NATURAL JOIN contient c NATURAL JOIN morpion_en_jeu m WHERE c.eqp_id = $eqp"; //TODO
  
  	$res = mysqli_query($connexion,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysql_error());
   	while($arr = mysqli_fetch_assoc($res) ){ 

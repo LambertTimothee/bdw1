@@ -1,11 +1,12 @@
 <header>
 	
-    <div style="float: left;">
+    <div  id='site_logo'>
         <a href="index.php">
-        	<img src="img/morpion.png" width="30%" height="30%" />
+        	<img src="img/morpion.png"/>
         </a>
     </div>
-    
-    <h1>Morpale le jeu!</h1>
+    <div  id='site_titre'>    
+    <h1>Morpale le jeu</h1>
+    </div>
    
 </header>
