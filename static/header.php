@@ -5,7 +5,7 @@
         	<img src="img/morpion.png"/>
         </a>
     </div>
-    <div  id='site_titre'>    
+    <div id='site_titre'>    
     <h1>Morpale le jeu</h1>
     </div>
    

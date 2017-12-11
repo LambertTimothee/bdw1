@@ -44,13 +44,69 @@ if($_POST['formType']==2) {
 				addmrpig($valueList["mrp__def_nom"],$valueList["mrp_def_icone"],$valueList["mrp_def_hp"],$valueList["mrp__def_degat"],$valueList["mrp_def_mana"],$valueList["mrp_def_class"],$equipe2,$eqp);	
 															
 														}
-	header ("location:../index.php?page=partie.php&equipe1=$equipe1&equipe2=$equipe2");
+	header ("location:../index.php?page=partie.php&action=perso&equipe1=$equipe1&equipe2=$equipe2");
 }
 
 
 if($_POST['formType']==3) {
-	if ($_POST["equipe"]==1) {
-		
+	$listemrpeqp=listemrpeqp($_POST['eqp_id']);
+	$equipe1 = $_POST['eqp_idRe1'];
+	$equipe2 = $_POST['eqp_idRe2'];
+	$check = false;
+	foreach ($listemrpeqp as $keyList => $valueList) {
+		$radio = $valueList["mrp_nom"];
+		if (isset($_POST[$radio])) {
+			$check = true;
+			header ("location:../index.php?page=partie.php&action=action&equipe1=$equipe1&equipe2=$equipe2&tour=".$_POST['eqp_id']."&perso=".$valueList['mrp_id']);
+		}
 	}
+	if ($check == false) {
+		//TODO
+	}
+}
+
+if($_POST['formType']==4) {
+	$equipe1 = $_POST['eqp_idRe1'];
+	$equipe2 = $_POST['eqp_idRe2'];
+	$mrp_id = $_POST['mrp_id'];
+	if ($_POST['eqp_id'] == 1 ) {		
+		$eqp = 2;
+	}
+	else{
+		$eqp = 1;
+	}
+	for ($i=1; $i < $_POST['taille']; $i++) {
+			for ($j=1; $j < $_POST['taille']; $j++) { 
+				if (isset($_POST[$i."_".$j])) {
+					placeMrp($i,$j,$mrp_id);
+					header ("location:../index.php?page=partie.php&action=perso&equipe1=$equipe1&equipe2=$equipe2&tour=".$eqp);
+				}
+			}
+	}
+
+
+}
+
+
+if($_POST['formType']==5) {
+	$equipe1 = $_POST['eqp_idRe1'];
+	$equipe2 = $_POST['eqp_idRe2'];
+	if ($_POST['eqp_id'] == 1 ) {		
+		$eqp = 2;
+		$eqpAdv = $equipe1;
+	}
+	else{
+		$eqp = 1;
+		$eqpAdv = $equipe2;
+
+	}
+	foreach ($eqpAdv as $valueList) {
+		if (isset($_POST[$valueList['mrp_nom']])) {
+			echo $valueList['mrp_nom'];
+		}
+	}
+
+
+	//header ("location:../index.php?page=partie.php&action=perso&equipe1=$equipe1&equipe2=$equipe2&tour=".$eqp);
 }
 ?>

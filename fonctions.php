@@ -87,7 +87,7 @@
 	
 	function listemrpeqp ($eqp_ig) {
 			global $connexion;
-			$sql = "SELECT * FROM morpion_en_jeu WHERE eqp_ig=$eqp_ig";
+			$sql = "SELECT * FROM morpion_en_jeu NATURAL JOIN contient WHERE eqp_ig=$eqp_ig";
 			$res=mysqli_query($connexion,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 			while($arr = mysqli_fetch_assoc($res) ){ 
 					$ret[] = $arr;
@@ -105,9 +105,9 @@ function getPara(){
   		$retour[] = $arr;
   	}
   	return $retour;
-  }
+}
   
- function getEquip($eqp){
+function getEquip($eqp){
   	global $connexion;
  	$sql = "SELECT * FROM equipe";
  	$res=mysqli_query($connexion,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysql_error());
@@ -118,6 +118,35 @@ function getPara(){
   		$retour[] = $arr;
   	}
   	return $retour;
-  }
+}
+
+function selectMrp($id){
+	global $connexion;
+ 	$sql = "SELECT * FROM morpion_en_jeu where mrp_id = $id";
+ 	$res = mysqli_query($connexion,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysql_error());
+	while($arr = mysqli_fetch_assoc($res) ){ 
+  		$retour[] = $arr;
+  	}
+  	return $retour;
+
+
+}
+
+function placeMrp($x,$y,$id){
+	global $connexion;
+	$sql = "UPDATE morpion_en_jeu SET  mrp_coordonneesX = $x, mrp_coordonneesY = $y WHERE mrp_id = $id";
+	mysqli_query($connexion,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
+}
+
+function actionArcher($mrp, $eqpAdv){
+	echo "Choisissez qui attaquer : ";
+	foreach ($eqpAdv as $mrpAdv) {
+		if ($mrpAdv['mrp_coordonneesX'] != 'NULL' && $mrpAdv['mrp_coordonneesX'] != '') {
+			echo "<label for='test".$mrpAdv["mrp_id"]."'>".$mrpAdv["mrp_nom"]."</label>";
+			echo "<input type='radio' name='".$mrpAdv["mrp_nom"]."' id='test".$mrpAdv["mrp_id"]."' value='".$mrpAdv["mrp_id"]."'>";			
+		}
+	}
+	echo '<input type="hidden" name="formType" value="5">';
+}
 
 ?>
