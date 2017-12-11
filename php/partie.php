@@ -146,7 +146,6 @@ if($action == 'perso'){
 			foreach ($eqpAdv as $morpion) {
 				if ($morpion['mrp_coordonneesX'] == $i) {
 					$ligne += 1;
-					echo "ligne : $ligne";
 				}
 			}
 			if ($ligne == $para['taille']) {
@@ -157,7 +156,6 @@ if($action == 'perso'){
 					foreach ($eqpAdv as $morpion) {
 						if ($morpion['mrp_coordonneesY'] == $j && $morpion['mrp_coordonneesX']) {
 							$diag1 += 1;
-							echo "diag1 : $diag1";
 						}
 
 					}
@@ -170,7 +168,6 @@ if($action == 'perso'){
 						if ($morpion['mrp_coordonneesY'] == $j && $morpion['mrp_coordonneesX']) {
 
 							$diag2 += 1;
-							echo "diag2 : $diag2";
 						}
 
 					}
@@ -182,7 +179,6 @@ if($action == 'perso'){
 				foreach ($eqpAdv as $morpion) {
 					if ($morpion['mrp_coordonneesY'] == $j) {
 						$colonne[$i] += 1;
-						echo "colonne[$i] : $colonne[$i]";
 					}
 
 				}
@@ -193,7 +189,6 @@ if($action == 'perso'){
 			}
 		}
 		if ($win) {
-			print_r($eqpAdv[0]);
 			header ("location:index.php?page=win.php&win=".$eqpAdv[0]['eqp_nom']);
 		}
 

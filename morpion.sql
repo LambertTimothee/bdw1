@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 03 Décembre 2017 à 22:38
+-- Généré le :  Lun 11 Décembre 2017 à 10:51
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.19
 
@@ -48,6 +48,20 @@ CREATE TABLE `appartient` (
   `mrp_def_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `appartient`
+--
+
+INSERT INTO `appartient` (`eqp_id`, `mrp_def_id`) VALUES
+(7, 6),
+(7, 7),
+(7, 8),
+(7, 9),
+(8, 11),
+(8, 13),
+(8, 14),
+(8, 17);
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +72,20 @@ CREATE TABLE `contient` (
   `eqp_id` int(11) NOT NULL,
   `mrp_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `contient`
+--
+
+INSERT INTO `contient` (`eqp_id`, `mrp_id`) VALUES
+(7, 1),
+(7, 2),
+(7, 3),
+(7, 4),
+(8, 5),
+(8, 6),
+(8, 7),
+(8, 8);
 
 -- --------------------------------------------------------
 
@@ -80,7 +108,9 @@ CREATE TABLE `equipe` (
 INSERT INTO `equipe` (`eqp_id`, `eqp_nom`, `eqp_couleur`, `eqp_datecrea`, `eqp_format`) VALUES
 (4, 'Test', '#000000', '2017-11-27', 4),
 (5, '', '#000000', '2017-11-27', 4),
-(6, 'Test', '#000000', '2017-11-27', 4);
+(6, 'Test', '#000000', '2017-11-27', 4),
+(7, 'Lambert', '#000000', '2017-12-04', 4),
+(8, 'Albert', '#60db2b', '2017-12-04', 4);
 
 -- --------------------------------------------------------
 
@@ -133,9 +163,23 @@ CREATE TABLE `morpion_en_jeu` (
   `mrp_hp` int(11) DEFAULT NULL,
   `mrp_degat` int(11) DEFAULT NULL,
   `mrp_mana` int(11) DEFAULT NULL,
-  `mrp_classe` varchar(25) DEFAULT NULL,
-  `eqp_id` int(11) NOT NULL
+  `mrp_class` varchar(25) DEFAULT NULL,
+  `eqp_ig` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `morpion_en_jeu`
+--
+
+INSERT INTO `morpion_en_jeu` (`mrp_id`, `mrp_nom`, `mrp_coordonneesX`, `mrp_coordonneesY`, `mrp_icone`, `mrp_hp`, `mrp_degat`, `mrp_mana`, `mrp_class`, `eqp_ig`) VALUES
+(1, 'David', NULL, NULL, 'David.jpg', 10, 0, 0, 'Guerrier', 1),
+(2, 'Jean', NULL, NULL, 'Jean.jpg', 3, 15, 0, 'Archer', 1),
+(3, 'Baptiste', NULL, NULL, 'Random.jpg', 10, 3, 5, 'Mage', 1),
+(4, 'Pierre', 1, 1, 'Random.jpg', 18, 0, 0, 'Guerrier', 1),
+(5, 'Goliath', NULL, NULL, 'Random.jpg', 5, 13, 0, 'Guerrier', 2),
+(6, 'Jésus', NULL, NULL, 'Jesus.jpg', 10, 0, 8, 'Mage', 2),
+(7, 'Prométhé', 2, 2, 'Random.jpg', 1, 0, 18, 'Mage', 2),
+(8, 'Irma', NULL, NULL, 'Irma.jpg', 5, 2, 11, 'Mage', 2);
 
 -- --------------------------------------------------------
 
@@ -149,6 +193,13 @@ CREATE TABLE `parametre` (
   `prm_ptinit` int(11) DEFAULT NULL,
   `prm_crit` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `parametre`
+--
+
+INSERT INTO `parametre` (`prm_id`, `prm_taille`, `prm_ptinit`, `prm_crit`) VALUES
+(1, 3, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -233,17 +284,17 @@ ALTER TABLE `action`
 -- AUTO_INCREMENT pour la table `appartient`
 --
 ALTER TABLE `appartient`
-  MODIFY `eqp_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `eqp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `contient`
 --
 ALTER TABLE `contient`
-  MODIFY `eqp_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `eqp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `equipe`
 --
 ALTER TABLE `equipe`
-  MODIFY `eqp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `eqp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `morpion`
 --
@@ -253,12 +304,12 @@ ALTER TABLE `morpion`
 -- AUTO_INCREMENT pour la table `morpion_en_jeu`
 --
 ALTER TABLE `morpion_en_jeu`
-  MODIFY `mrp_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mrp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `parametre`
 --
 ALTER TABLE `parametre`
-  MODIFY `prm_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `prm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `partie`
 --
