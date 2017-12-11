@@ -165,3 +165,7 @@ td .mrp_id img{
 td .mrp_descr{
     height: 15%;
 }
+
+.dead{
+    background-color: red;
+}

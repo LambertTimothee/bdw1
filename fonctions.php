@@ -141,12 +141,37 @@ function placeMrp($x,$y,$id){
 function actionArcher($mrp, $eqpAdv){
 	echo "Choisissez qui attaquer : ";
 	foreach ($eqpAdv as $mrpAdv) {
-		if ($mrpAdv['mrp_coordonneesX'] != 'NULL' && $mrpAdv['mrp_coordonneesX'] != '') {
+		if ($mrpAdv['mrp_coordonneesX'] != 'NULL' && $mrpAdv['mrp_coordonneesX'] != '' && $mrpAdv['mrp_hp'] > 0) {
 			echo "<label for='test".$mrpAdv["mrp_id"]."'>".$mrpAdv["mrp_nom"]."</label>";
 			echo "<input type='radio' name='".$mrpAdv["mrp_nom"]."' id='test".$mrpAdv["mrp_id"]."' value='".$mrpAdv["mrp_id"]."'>";			
 		}
 	}
+	echo '<input type="hidden" name="degat" value="'.$mrp[0]['mrp_degat'].'">';
 	echo '<input type="hidden" name="formType" value="5">';
+}
+actionGuerrier($mrp_select, $eqpAdv,$para['crit']){
+	$rand = rand( 1, 100);
+	if($rand <= $mrp_select[0]['mrp_crit'])
+	echo "Choisissez qui attaquer : ";
+	foreach ($eqpAdv as $mrpAdv) {
+		if ($mrpAdv['mrp_coordonneesX'] != 'NULL' && $mrpAdv['mrp_coordonneesX'] != '' && $mrpAdv['mrp_hp'] > 0) {
+			echo "<label for='test".$mrpAdv["mrp_id"]."'>".$mrpAdv["mrp_nom"]."</label>";
+			echo "<input type='radio' name='".$mrpAdv["mrp_nom"]."' id='test".$mrpAdv["mrp_id"]."' value='".$mrpAdv["mrp_id"]."'>";			
+		}
+	}
+	echo '<input type="hidden" name="degat" value="'.$mrp[0]['mrp_degat'].'">';
+	echo '<input type="hidden" name="formType" value="6">';
+
+}/*
+actionMage($mrp_select, $eqpAdv){
+
+}*/
+
+function attaque($mrp_id,$hp,$deg){
+	$hp = $hp - $deg;
+	global $connexion;
+	$sql = "UPDATE morpion_en_jeu SET  mrp_hp = $hp WHERE mrp_id = $mrp_id";
+	mysqli_query($connexion,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 }
 
 ?>

@@ -43,16 +43,20 @@
 					echo "<div class='mrp_id'>";
 						echo "<img src='img/morpions/".$morpion['mrp_icone']."'>";
 					echo "</div>";
-					echo "<div class='mrp_descr'>";
-						echo "<p>".$morpion['mrp_nom']."</p>";						
-						echo "<p>".$morpion['mrp_class']."</p>";
-						echo "<p>PV : ".$morpion['mrp_hp']."</p>";
-						echo "<p>Dégats : ".$morpion['mrp_degat']."</p>";
-						if ($morpion['mrp_class'] == "Mage") {							
-							echo "<p>Mana : ".$morpion['mrp_mana']."</p>";
-						}
-						
-					echo "</div>";
+					if ($morpion['mrp_hp'] < 0) {
+						echo "<div class=dead> DEAD </div>";
+					}
+					else{
+						echo "<div class='mrp_descr'>";
+							echo "<p>".$morpion['mrp_nom']."</p>";						
+							echo "<p>".$morpion['mrp_class']."</p>";
+							echo "<p>PV : ".$morpion['mrp_hp']."</p>";
+							echo "<p>Dégats : ".$morpion['mrp_degat']."</p>";
+							if ($morpion['mrp_class'] == "Mage") {							
+								echo "<p>Mana : ".$morpion['mrp_mana']."</p>";
+							}						
+						echo "</div>";
+					}
 				echo "</div>";
 
 			}
@@ -67,7 +71,7 @@
 				for ($j=1; $j < $para['taille']+1; $j++) { 
 					echo "<td class='".$j."'>";
 					foreach ($equipe1 as $value) {
-						if($value['mrp_coordonneesX'] == $i && $value['mrp_coordonneesY'] == $j)
+						if($value['mrp_coordonneesX'] == $i && $value['mrp_coordonneesY'] == $j  && $value['mrp_hp'] > 0)
 						{
 							echo "<div class='morpion'>";
 								echo "<div class='mrp_id'>";
@@ -82,7 +86,7 @@
 						}
 					}
 					foreach ($equipe2 as $value) {
-						if($value['mrp_coordonneesX'] == $i && $value['mrp_coordonneesY'] == $j)
+						if($value['mrp_coordonneesX'] == $i && $value['mrp_coordonneesY'] == $j && $value['mrp_hp'] > 0)
 						{
 							echo "<div class='morpion'>";
 								echo "<div class='mrp_id'>";
@@ -113,16 +117,21 @@
 					echo "<div class='mrp_id'>";
 						echo "<img src='img/morpions/".$morpion['mrp_icone']."'>";
 					echo "</div>";
-					echo "<div class='mrp_descr'>";
-						echo "<p>".$morpion['mrp_nom']."</p>";						
-						echo "<p>".$morpion['mrp_class']."</p>";
-						echo "<p>PV : ".$morpion['mrp_hp']."</p>";
-						echo "<p>Dégats : ".$morpion['mrp_degat']."</p>";
-						if ($morpion['mrp_class'] == "Mage") {							
-							echo "<p>Mana : ".$morpion['mrp_mana']."</p>";
-						}
-						
-					echo "</div>";
+					if ($morpion['mrp_hp'] < 0) {
+						echo "<div class='dead'> DEAD </div>";
+					}
+					else{
+						echo "<div class='mrp_descr'>";
+							echo "<p>".$morpion['mrp_nom']."</p>";						
+							echo "<p>".$morpion['mrp_class']."</p>";
+							echo "<p>PV : ".$morpion['mrp_hp']."</p>";
+							echo "<p>Dégats : ".$morpion['mrp_degat']."</p>";
+							if ($morpion['mrp_class'] == "Mage") {							
+								echo "<p>Mana : ".$morpion['mrp_mana']."</p>";
+							}
+							
+						echo "</div>";
+					}
 				echo "</div>";
 
 			}
@@ -144,7 +153,7 @@ if($action == 'perso'){
 		$diag2 = 0;
 		for ($i=1; $i < $para['taille']+1; $i++) { 
 			foreach ($eqpAdv as $morpion) {
-				if ($morpion['mrp_coordonneesX'] == $i) {
+				if ($morpion['mrp_coordonneesX'] == $i && $morpion['mrp_hp'] > 0) {
 					$ligne += 1;
 				}
 			}
@@ -154,7 +163,7 @@ if($action == 'perso'){
 			for ($j=1; $j < $para['taille']+1; $j++) {
 				if ($i = $j) {
 					foreach ($eqpAdv as $morpion) {
-						if ($morpion['mrp_coordonneesY'] == $j && $morpion['mrp_coordonneesX']) {
+						if ($morpion['mrp_coordonneesY'] == $j && $morpion['mrp_coordonneesX'] && $morpion['mrp_hp'] > 0) {
 							$diag1 += 1;
 						}
 
@@ -165,7 +174,7 @@ if($action == 'perso'){
 				}
 				else if ($i+$j == $para['taille']+1) {
 					foreach ($eqpAdv as $morpion) {
-						if ($morpion['mrp_coordonneesY'] == $j && $morpion['mrp_coordonneesX']) {
+						if ($morpion['mrp_coordonneesY'] == $j && $morpion['mrp_coordonneesX'] && $morpion['mrp_hp'] > 0) {
 
 							$diag2 += 1;
 						}
@@ -177,7 +186,7 @@ if($action == 'perso'){
 					
 				}
 				foreach ($eqpAdv as $morpion) {
-					if ($morpion['mrp_coordonneesY'] == $j) {
+					if ($morpion['mrp_coordonneesY'] == $j && $morpion['mrp_hp'] > 0) {
 						$colonne[$i] += 1;
 					}
 
@@ -203,9 +212,27 @@ if($action == 'perso'){
 		<div>
 			<?php 
 			$listemrpeqp=listemrpeqp($eqp_id);
+			$countElem =0;
 			foreach ($listemrpeqp as $keyList => $valueList) {
+				if ($valueList['mrp_hp'] > 0)
+				{
+					
+					$countElem ++;
 				echo "<label for='test".$valueList["mrp_id"]."'>".$valueList["mrp_nom"]."</label>";
 				echo "<input type='radio' name='".$valueList["mrp_nom"]."' id='test".$valueList["mrp_id"]."' value='".$valueList["mrp_id"]."'>";
+			}
+				
+			}
+/*
+			foreach ($eqpAdv as $valueList) {
+				echo $countElem;
+				if ($valueList['mrp_hp'] > 0)
+				{
+					$countElem ++;
+				}
+			}*/
+			if ($countElem == 0) {
+			header ("location:index.php?page=win.php&win=".$eqpAdv[0]['eqp_nom']);				
 			}
 
 
@@ -273,13 +300,13 @@ elseif ($action == 'action') {
 			for ($j=1; $j < $para['taille']+1; $j++) { 
 				$check = true;
 				foreach ($equipe1 as $value) {
-					if($value['mrp_coordonneesX'] == $i && $value['mrp_coordonneesY'] == $j)
+					if($value['mrp_coordonneesX'] == $i && $value['mrp_coordonneesY'] == $j && $value['mrp_hp'] > 0)
 					{
 						$check = false;
 					}
 				}
 				foreach ($equipe2 as $value) {
-					if($value['mrp_coordonneesX'] == $i && $value['mrp_coordonneesY'] == $j)
+					if($value['mrp_coordonneesX'] == $i && $value['mrp_coordonneesY'] == $j && $value['mrp_hp'] > 0)
 					{
 						$check = false;
 					}

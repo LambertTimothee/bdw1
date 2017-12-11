@@ -89,24 +89,25 @@ if($_POST['formType']==4) {
 
 
 if($_POST['formType']==5) {
+	$degat = $_POST['degat'];
 	$equipe1 = $_POST['eqp_idRe1'];
 	$equipe2 = $_POST['eqp_idRe2'];
 	if ($_POST['eqp_id'] == 1 ) {		
 		$eqp = 2;
-		$eqpAdv = $equipe1;
+		$eqpAdv = getEquip($equipe2);
 	}
 	else{
 		$eqp = 1;
-		$eqpAdv = $equipe2;
+		$eqpAdv = getEquip($equipe1);
 
 	}
 	foreach ($eqpAdv as $valueList) {
 		if (isset($_POST[$valueList['mrp_nom']])) {
-			echo $valueList['mrp_nom'];
+			attaque($valueList['mrp_id'],$valueList['mrp_hp'],$degat);
 		}
 	}
 
 
-	//header ("location:../index.php?page=partie.php&action=perso&equipe1=$equipe1&equipe2=$equipe2&tour=".$eqp);
+	header ("location:../index.php?page=partie.php&action=perso&equipe1=$equipe1&equipe2=$equipe2&tour=".$eqp);
 }
 ?>
